@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文章列表--layui后台管理模板 2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__NEWCSS__/public.css?ver={$ver}" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">上传七牛云</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="server" name="server" value=""  placeholder="">
+            <div style="margin-top:7px;" class="layui-upload">
+                <button type="button" class="layui-btn" class="test1">上七牛云</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img" class="demo1">
+                    <p class="demoText"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">上传本地</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="local" name="local" value=""  placeholder="">
+            <div style="margin-top:7px;" class="layui-upload">
+                <button type="button" class="layui-btn" id="test2">上传本地</button>
+                <div class="layui-upload-list">
+                    <img class="layui-upload-img demo2">
+                    <p class="demoText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-row layui-col-xs12">
+        <div class="layui-input-block">
+            <button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+<script type="text/javascript" src="__NEWJS__/attachment/attachmentadd.js?ver={$ver}"></script>
+</body>
+</html>

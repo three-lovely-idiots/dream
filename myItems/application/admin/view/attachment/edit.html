@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>文章列表--layui后台管理模板 2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all" />
+    <link rel="stylesheet" href="__NEWCSS__/public.css?ver={$ver}" media="all" />
+    <script type="text/javascript" src="__NEWJS__/config.js"></script>
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">物理地址</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="url" name="url" value="{php}if($data&&isset($data['url'])){ echo $data['url']; } {/php}"  placeholder="">
+        </div>
+
+    </div>
+
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">图片来源</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="from" name="from" value="{php}if($data&&isset($data['from'])){ echo $data['from'] == 1?'local':'online'; } {/php}"  placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">图片宽度</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="imagewidth" name="imagewidth" value="{php}if($data&&isset($data['imagewidth'])){ echo $data['imagewidth']; } {/php}"  placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">图片高度</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="imageheight" name="imageheight" value="{php}if($data&&isset($data['imageheight'])){ echo $data['imageheight']; } {/php}"  placeholder="">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-row layui-col-xs7">
+        <label class="layui-form-label">图片类型</label>
+        <div class="layui-input-block">
+            <input type="text" class="layui-input" id="imagetype" name="imagetype" value="{php}if($data&&isset($data['imagetype'])){ echo $data['imagetype']; } {/php}"  placeholder="">
+        </div>
+    </div>
+    <input type="hidden" class="layui-input" name="id" value="{php}if($data&&isset($data['id'])){ echo $data['id']; } {/php}">
+
+    <div class="layui-form-item layui-row layui-col-xs12">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn layui-btn-sm layui-btn-success" lay-submit lay-filter="edit-image">确定</button>
+            <button type="reset" class="layui-btn layui-btn-sm layui-btn-danger">取消</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+<script type="text/javascript" src="__NEWJS__/attachment/attachmentedit.js?ver={$ver}"></script>
+</body>
+</html>

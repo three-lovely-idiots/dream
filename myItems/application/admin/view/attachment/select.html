@@ -1,0 +1,77 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>附件图片管理</h5>
+        </div>
+        <div class="ibox-content">
+            <div id="toolbar" class="toolbar" style="position: relative;">
+                <a href="javascript:;" class="btn btn-primary btn-refresh" title="刷新"><i class="fa fa-refresh"></i> </a>
+                <a href="javascript:;" class="btn btn-success" id="related" title="添加"><i class="fa fa-plus"></i> 确定关联</a>
+                <div id="html5_1d03qaeqt1m0vqm154p165q1pf24_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 0px; left: 240px; width: 65px; height: 31px; overflow: hidden; z-index: 0;">
+                    <input id="html5_1d03qaeqt1m0vqm154p165q1pf24" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" accept="text/csv,.csv,application/vnd.ms-excel,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xlsx">
+                </div>
+            </div>
+            <div class="example-wrap">
+                <div class="example">
+                    <table id="cusTable">
+                    </table>
+                </div>
+            </div>
+            <!-- End Example Pagination -->
+        </div>
+    </div>
+</div>
+<!-- End Panel Other -->
+</div>
+{include file="public/script" /}
+<script type="text/javascript">
+    function initTable() {
+        var table = $('#cusTable');
+        Table.init({
+            extend: {
+                index_url: './select',
+                add_url: './add',
+                edit_url: './edit',
+                del_url: './delete',
+                multi_url: 'general/attachment/multi',
+                table: 'attachment'
+            }
+        });
+        //先销毁表格
+        table.bootstrapTable('destroy');
+        //初始化表格,动态从服务器加载数据
+        table.bootstrapTable({
+            url: $.fn.bootstrapTable.defaults.extend.index_url, //获取数据的地址
+            sortName: 'id',
+            columns: [ //这里可以单独拎出去
+                [
+                    {field: 'state', checkbox: true,},
+                    {field: 'id', title: 'Id'},
+                    {field: 'url', title: '预览', formatter: Table.formatter.thumb, operate: false},
+                    {field: 'url', title: '物理路径', formatter: Table.formatter.url},
+                    {
+                        field: 'operate',
+                        title: '操作',
+                        table: table,
+                        events: {
+                            'click .btn-chooseone': function (e, value, row, index) {
+                                Fast.api.close(row)
+                             }},
+                        formatter: Table.formatter.operate1
+                    }
+                ]
+            ],
+        });
+
+        Table.bindEvent(table)
+    }
+    $(document).ready(function () {
+        //调用函数，初始化表格
+        initTable();
+    });
+</script>
+</body>
+</html>

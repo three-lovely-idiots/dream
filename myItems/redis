@@ -1,0 +1,7 @@
+index 前台
+   分类页面的redis缓存
+        model/Category/getCategories
+        $redis_key = 'cats:'.request()->module();
+        前台是 cats:index 后台是cats:admin
+
+   主页的redis 缓存

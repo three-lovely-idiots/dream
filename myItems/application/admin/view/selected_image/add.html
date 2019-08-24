@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all" />
+	<link rel="stylesheet" href="__NEWCSS__/public.css?ver={$ver}" media="all" />
+	<!-- Bootstrap stylesheet -->
+	<link rel="stylesheet" type="text/css" href="__NEW__/clockpicker-gh-pages/assets/css/bootstrap.css">
+	<!-- ClockPicker Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="__NEW__/clockpicker-gh-pages/dist/bootstrap-clockpicker.css">
+	<link rel="stylesheet" type="text/css" href="__NEW__/datetimepicker/css/jquery.datetimepicker.css">
+	<link rel="stylesheet" href="__LAYUI__/css/inputTags.css" media="all" />
+	<!-- jQuery and Bootstrap scripts -->
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/assets/js/jquery.js"></script>
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="__NEW__/datetimepicker/js/jquery.datetimepicker.js"></script>
+	<!-- ClockPicker script -->
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/dist/bootstrap-clockpicker.js"></script>
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+	<input type="hidden" class="layui-input" id="id" name="id" value="{php}if($data&&isset($data['id'])){ echo $data['id']; } {/php}" >
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">美图标题</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input" name="name" value="{php}if($data&&isset($data['name'])){ echo $data['name']; } {/php}" lay-verify="required">
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs7">
+		<label class="layui-form-label">图片上传</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input" id="image_url" name="image_url" value="{php}if($data&&isset($data['img'])){ echo $data['img']['url']; } {/php}"  lay-verify="required">
+			<input type="hidden" class="layui-input" id="image_id" value="{php}if($data&&isset($data['img'])){ echo $data['img']['id']; } {/php}" name="image_id" value="" >
+			<div style="margin-top:7px;" class="layui-upload">
+				<button type="button" class="layui-btn" id="test2">上传</button>
+				<button type="button" class="layui-btn layui-btn-danger" data-input-id="image_url" id="choose">选择</button>
+				<div class="layui-upload-list">
+					<img class="layui-upload-img demo2" src="{php}if($data&&isset($data['img'])){ echo $data['img']['url']; } {/php}" width="150">
+					<p class="demoText"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">主标签</label>
+		{php} foreach($style_tags as $key=>$value){ {/php}
+		<div class="layui-input-block">
+			<div style="margin:10px;">{php}echo $value['title'];{/php}</div>
+			{php} foreach($value['styles'] as $k=>$v){ {/php}
+			<input type="checkbox" name="tag_data" class="tag_data" {php} if((count($default_styles)>0)&&in_array($v["title"],$default_styles)){echo 'checked="true"';}; {/php} value="{php} echo $v['id'];{/php}" lay-filter="tag_data" title="{php} echo $v['title'];{/php}">
+			{php} } {/php}
+		</div>
+		{php} } {/php}
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">自定标签</label>
+		<div class="tags" id="tags">
+			<input type="text" name="inputTags" id="inputTags" placeholder="空格生成标签" autocomplete="off">
+		</div>
+	</div>
+
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button type="submit" class="layui-btn layui-btn-sm" lay-submit lay-filter="addSelectedImage">立即添加</button>
+			<button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+<script type="text/javascript" src="__JS__/plugins/layer/layer.min.js"></script>
+<script type="text/javascript" src="__NEWJS__/fast.js?ver={$ver}"></script>
+<script type="text/javascript">
+	var self_styles = JSON.parse('{$self_styles}')
+</script>
+<script type="text/javascript" src="__NEWJS__/selectedimage/add.js?ver={$ver}"></script>
+</body>
+</html>

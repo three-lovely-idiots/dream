@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章列表--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="__LAYUI__/css/layui.css" media="all" />
+	<link rel="stylesheet" href="__NEWCSS__/public.css?ver={$ver}" media="all" />
+	<!-- Bootstrap stylesheet -->
+	<link rel="stylesheet" type="text/css" href="__NEW__/clockpicker-gh-pages/assets/css/bootstrap.css">
+	<!-- ClockPicker Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="__NEW__/clockpicker-gh-pages/dist/bootstrap-clockpicker.css">
+	<link rel="stylesheet" type="text/css" href="__NEW__/datetimepicker/css/jquery.datetimepicker.css">
+	<!-- jQuery and Bootstrap scripts -->
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/assets/js/jquery.js"></script>
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="__NEW__/datetimepicker/js/jquery.datetimepicker.js"></script>
+	<!-- ClockPicker script -->
+	<script type="text/javascript" src="__NEW__/clockpicker-gh-pages/dist/bootstrap-clockpicker.js"></script>
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:80%;">
+	<input type="hidden" class="layui-input" id="id" name="id" value="{php}if($data&&isset($data['id'])){ echo $data['id']; } {/php}" >
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">预约标题</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input" name="title" value="{php}if($data&&isset($data['title'])){ echo $data['title']; } {/php}" lay-verify="required">
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs7">
+		<label class="layui-form-label">主题图片</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input" id="appoint-image" name="local" value="{php}if($data&&isset($data['img'])){ echo $data['img']['url']; } {/php}"  lay-verify="required">
+			<input type="hidden" class="layui-input" id="image_id" value="{php}if($data&&isset($data['img'])){ echo $data['image_id']; } {/php}" name="local" value="" >
+			<div style="margin-top:7px;" class="layui-upload">
+				<button type="button" class="layui-btn" id="test2">上传</button>
+				<button type="button" class="layui-btn layui-btn-danger" data-input-id="appoint-image" id="choose">选择</button>
+				<div class="layui-upload-list">
+					<img class="layui-upload-img demo2" src="{php}if($data&&isset($data['img'])){ echo $data['img']['url']; } {/php}" width="150">
+					<p class="demoText"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-row">
+		<div class="magb15 layui-col-md8 layui-col-xs12">
+			<label class="layui-form-label">预约说明</label>
+			<div class="layui-input-block">
+				<textarea class="layui-textarea layui-hide" name="description" lay-verify="description" id="desc">{php}if($data&&isset($data['description'])){ echo $data['description']; } {/php}</textarea>
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-row">
+		<input type="hidden" name="srvtime" class="srvtime" value=""/>
+	</div>
+
+	<div lass="layui-row" style="margin-top:10px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">添加排除日期</label>
+			<button class="layui-btn layui-btn-sm add-exclude" lay-filter="add-exclude" style="margin:10px 30px;" style="margin-top:10px;"><i class="layui-icon"></i></button>
+		</div>
+	</div>
+
+    <div lass="layui-row" style="margin-top:30px;">
+        <div class="magb15 layui-col-md7 layui-col-xs12">
+            <label class="layui-form-label">开始日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="begin_time" id="begin_time" lay-verify="required" value="{php}if($data&&isset($data['begin_time'])){ echo $data['begin_time']; } {/php}" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div lass="layui-row">
+        <div class="magb15 layui-col-md7 layui-col-xs12">
+            <label class="layui-form-label">结束日期</label>
+            <div class="layui-input-block">
+                <input type="text" name="end_time" id="end_time" lay-verify="required" value="{php}if($data&&isset($data['end_time'])){ echo $data['end_time']; } {/php}" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">可预约天数范围</label>
+			<div class="layui-input-block">
+				<input type="text" name="appoint_days" id="appoint_days" value="{php}if($data&&isset($data['appoint_days'])){ echo $data['appoint_days']; }else{echo 7;} {/php}" lay-verify="required" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">通知邮箱</label>
+			<div class="layui-input-block">
+				<input type="text" name="notify_email"  id="notify_email" value="{php}if($data&&isset($data['notify_email'])){ echo $data['notify_email']; } {/php}" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">通知客服-模板消息ID</label>
+			<div class="layui-input-block">
+				<input type="text" name="cs_templateid" value="{php}if($data&&isset($data['cs_templateid'])){ echo $data['cs_templateid']; } {/php}" id="cs_templateid" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">通知粉丝-模板消息ID</label>
+			<div class="layui-input-block">
+				<input type="text" name="fans_templateid" value="{php}if($data&&isset($data['fans_templateid'])){ echo $data['fans_templateid']; } {/php}" id="fans_templateid" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">每人可预约次数</label>
+			<div class="layui-input-block">
+				<span style="float:left;" class="layui-input-inline layui-form-pane">0为不限制</span>
+				<input type="text" name="pre_total" id="pre_total" value="{php}if($data&&isset($data['pre_total'])){ echo $data['pre_total']; } {/php}" autocomplete="off" value="0" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div lass="layui-row" style="margin-top:30px;">
+		<div class="layui-col-md7 layui-col-xs12">
+			<label class="layui-form-label">每人每天可预约次数</label>
+			<div class="layui-input-block" style="margin-top:10px;">
+				<span style="float:left;" class="layui-input-inline layui-form-pane">0为不限制</span>
+				<input type="text" name="day_total"  id="day_total" value="{php}if($data&&isset($data['day_total'])){ echo $data['day_total']; } {/php}" value="0" class="layui-input">
+			</div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">修改预约信息</label>
+		<div class="layui-input-block userSex">
+			<input type="radio" name="edit" class="edit" value="0" title="开" {php}if($data&&isset($data['edit'])&&$data['edit'] == 0){ echo "checked"; } {/php}
+			{php}if(!($data&&isset($data['edit']))){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>开</div></div>
+			<input type="radio" name="edit" class="edit" value="1" title="关" {php}if($data&&isset($data['edit'])&&$data['edit'] == 1){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关</div></div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">二维码核销</label>
+		<div class="layui-input-block userSex">
+			<input type="radio" name="code" class="code" value="0" title="开" {php}if($data&&isset($data['code'])&&$data['code'] == 0){ echo "checked"; } {/php}
+			{php}if(!($data&&isset($data['code']))){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>开</div></div>
+			<input type="radio" name="code" class="code" value="1" title="关" {php}if($data&&isset($data['code'])&&$data['code'] == 1){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关</div></div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">关注公众号</label>
+		<div class="layui-input-block userSex">
+			<input type="radio" name="follow" class="follow" value="0" title="开" {php}if($data&&isset($data['follow'])&&$data['follow'] == 0){ echo "checked"; } {/php}
+			{php}if(!($data&&isset($data['follow']))){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>开</div></div>
+			<input type="radio" name="follow" class="follow" value="1" title="关" {php}if($data&&isset($data['follow'])&&$data['follow'] == 1){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关</div></div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">显示该预约</label>
+		<div class="layui-input-block userSex">
+			<input type="radio" name="isshow" class="isshow" value="0" title="开" {php}if($data&&isset($data['isshow'])&&$data['isshow'] == 0){ echo "checked"; } {/php}
+			{php}if(!($data&&isset($data['isshow']))){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>开</div></div>
+			<input type="radio" name="isshow" class="isshow" value="1" title="关" {php}if($data&&isset($data['isshow'])&&$data['isshow'] == 1){ echo "checked"; } {/php} lay-filter="notify_type" ><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>关</div></div>
+		</div>
+	</div>
+
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button type="submit" class="layui-btn layui-btn-sm" lay-submit lay-filter="addAppoint">立即添加</button>
+			<button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">取消</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="__LAYUI__/layui.js"></script>
+<script type="text/javascript" src="__JS__/plugins/layer/layer.min.js"></script>
+<script type="text/javascript" src="__NEWJS__/fast.js?ver={$ver}"></script>
+<script type="text/javascript">
+	    var time_list = {php}if($data&&isset($data['appoint_time_list'])){ echo $data['appoint_time_list']; } {/php};
+		var exclude_date = "{php}if($data&&isset($data['exclude_date'])){ echo $data['exclude_date']; } {/php}";
+</script>
+<script type="text/javascript" src="__NEWJS__/appointsAdd.js?ver={$ver}"></script>
+</body>
+</html>
